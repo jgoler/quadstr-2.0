@@ -3,8 +3,6 @@ import { setAlert } from './alert';
 import {
   CREATE_SUCCESS,
   CREATE_FAIL,
-  GET_PROFILE,
-  PROFILE_ERROR,
   USER_LOADED,
   AUTH_ERROR,
   JOIN_SUCCESS,
@@ -234,7 +232,7 @@ export const joinChat = (formData, history) => async dispatch => {
 
     history.push('/profile');
   } catch (err) {
-    const errors = err.response.data.errors;
+    //const errors = err.response.data.errors;
     /*
         if (errors) {
           errors.forEach(error => dispatch(setAlert(error.msg, 'danger')));

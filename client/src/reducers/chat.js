@@ -42,8 +42,7 @@ export default function (state = initialState, action) {
 */
 import {
   JOIN_SUCCESS,
-  JOIN_FAIL,
-  ADD_POST
+  JOIN_FAIL
 } from '../actions/types';
 
 const initialState = {

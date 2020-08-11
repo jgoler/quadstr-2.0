@@ -38,7 +38,6 @@ export default connect(mapStateToProps, { getPostById })(Post);
 import React, { Fragment, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import { getChatById } from '../../actions/profile';
 
 const Post = ({
@@ -47,7 +46,7 @@ const Post = ({
   match }) => {
   useEffect(() => {
     getChatById(match.params.chatId)
-  }, [getChatById])
+  }, [getChatById, match.params.chatId])
 
 
   /*

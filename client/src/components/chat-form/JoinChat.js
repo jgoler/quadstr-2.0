@@ -71,7 +71,6 @@ export default connect(
 
 */
 import React, { Fragment, useState } from 'react';
-import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { joinChat } from '../../actions/chat';

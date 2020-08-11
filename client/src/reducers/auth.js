@@ -6,8 +6,6 @@ import {
   LOGIN_SUCCESS,
   LOGIN_FAIL,
   LOGOUT,
-  JOIN_SUCCESS,
-  JOIN_FAIL,
   CREATE_SUCCESS,
   CREATE_FAIL,
 
@@ -31,7 +29,7 @@ export default function (state = initialState, action) {
         isAuthenticated: true,
         loading: false,
         user: payload
-      }
+      };
     case REGISTER_SUCCESS:
     case LOGIN_SUCCESS:
       localStorage.setItem('token', payload.token);
@@ -40,21 +38,18 @@ export default function (state = initialState, action) {
         ...payload,
         isAuthenticated: true,
         loading: false
-      }
-    //case JOIN_SUCCESS:
+      };
     case CREATE_SUCCESS:
       return {
         ...state,
         ...payload,
-        //isAuthenticated: true,
         isCompleted: true,
         loading: false
-      }
+      };
     case REGISTER_FAIL:
     case AUTH_ERROR:
     case LOGIN_FAIL:
     case LOGOUT:
-    //case JOIN_FAIL:
     case CREATE_FAIL:
       localStorage.removeItem('token');
       return {
@@ -63,7 +58,7 @@ export default function (state = initialState, action) {
         isAuthenticated: false,
         loading: false,
         isCompleted: null
-      }
+      };
     default:
       return state;
   }

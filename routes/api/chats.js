@@ -353,6 +353,7 @@ router.get('/:id', auth, async (req, res) => {
     res.json(chat);
   } catch (err) {
     console.error(err.message);
+    console.log("Hello");
     res.status(500).send('Server Error');
   }
 })

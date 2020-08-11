@@ -6,8 +6,10 @@ import { addPost } from '../../actions/chat';
 const PostForm = ({ addPost, match, history }) => {
   const [formData, setFormData] = useState({
     title: '',
-    text: ''
+    text: '',
   });
+
+  const [clicked, setClicked] = useState(false);
 
   const {
     title,
@@ -18,6 +20,13 @@ const PostForm = ({ addPost, match, history }) => {
 
   const onSubmit = e => {
     e.preventDefault();
+    console.log(`Click:  ${clicked}`);
+    if (clicked) {
+      return;
+    }
+    else {
+      setClicked(true)
+    }
     addPost(match.params.id, { title, text }, history);
     console.log(formData);
     setFormData({

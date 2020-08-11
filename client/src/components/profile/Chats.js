@@ -1,11 +1,10 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
 
 const Chats = ({ chat }) => {
   const chats = chat.map(ch => (
-    <li key={ch._id} class="text-primary">
+    <li key={ch._id} className="text-primary">
       <Link to={`/chat/${ch._id}`}>{ch.title}</Link>
     </li>
   ));
@@ -29,7 +28,7 @@ const Chats = ({ chat }) => {
 }
 
 Chats.propTypes = {
-  chat: PropTypes.object.isRequired
+  chat: PropTypes.array
 }
 
 export default Chats;

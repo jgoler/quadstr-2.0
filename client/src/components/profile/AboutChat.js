@@ -1,7 +1,6 @@
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import { getChatById } from '../../actions/profile';
 
 const AboutChat = ({
@@ -11,7 +10,7 @@ const AboutChat = ({
   match }) => {
   useEffect(() => {
     getChatById(match.params.id)
-  }, [])
+  }, [getChatById, match.params.id])
 
   return chat ? <Fragment>
     <h1 className="large text-primary">About {chat.title}</h1>
@@ -31,6 +30,7 @@ const AboutChat = ({
     </div>
   </Fragment> : <Fragment>Loading...</Fragment>
 
+  /*
   return chat ? <Fragment>
     <h1 className="large text-primary">{chat.title}</h1>
     <p className="lead">Welcome to {chat.title}</p>
@@ -54,7 +54,7 @@ const AboutChat = ({
     </div>
 
   </Fragment> : <p>Loading...</p>
-
+*/
 }
 
 /*

@@ -11,7 +11,7 @@ const Profile = ({
   profile: { profile, loading } }) => {
   useEffect(() => {
     getCurrentProfile();
-  }, []);
+  }, [getCurrentProfile]);
   return loading && profile === null ? <div>Loading...</div> : <Fragment>
     <h1 className="large text-primary">
       Profile

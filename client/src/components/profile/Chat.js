@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -11,7 +11,7 @@ const Chat = ({
   match }) => {
   useEffect(() => {
     getChatById(match.params.id)
-  }, [getChatById])
+  }, [getChatById, match.params.id])
 
   return chat ? <Fragment>
     <h1 className="large text-primary">{chat.title}</h1>
@@ -57,7 +57,7 @@ const Chat = ({
 */
 Chat.propTypes = {
   getChatById: PropTypes.func.isRequired,
-  chat: PropTypes.object.isRequired
+  chat: PropTypes.array
 
 }
 
