@@ -18,6 +18,7 @@ import Chat from './components/profile/Chat';
 import PostForm from './components/profile/PostForm';
 import AboutChat from './components/profile/AboutChat';
 import Post from './components/profile/Post';
+import CommentForm from './components/profile/CommentForm';
 
 import './App.css';
 
@@ -46,6 +47,7 @@ const App = () => {
               <PrivateRoute exact path='/join-chat' component={JoinChat} />
               <PrivateRoute exact path='/chat/:id' component={Chat} />
               <PrivateRoute exact path='/post-form/:id' component={PostForm} />
+              <PrivateRoute exact path='/comment-form/:chatId/:postId' component={CommentForm} />
               <PrivateRoute exact path='/chat-details/:id' component={AboutChat} />
               <PrivateRoute exact path='/post/:chatId/:postId' component={Post} />
             </Switch>

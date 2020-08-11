@@ -7,7 +7,8 @@ import {
   AUTH_ERROR,
   JOIN_SUCCESS,
   JOIN_FAIL,
-  ADD_POST
+  ADD_POST,
+  ADD_COMMENT
 } from './types';
 import setAuthToken from '../utils/setAuthToken';
 
@@ -49,6 +50,33 @@ export const getCurrentProfile = () => async dispatch => {
   }
 };
 */
+
+// Add comment
+export const addComment = (chatId, postId, formData, history) => async dispatch => {
+  const config = {
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }
+
+  try {
+    const res = await axios.put(`/api/chats/post/comment/${chatId}/${postId}`, formData, config);
+    dispatch({
+      type: ADD_COMMENT,
+      payload: res.data
+    });
+
+    dispatch(setAlert('Comment Created', 'success'));
+
+    history.push(`/post/${chatId}/${postId}`);
+  } catch (err) {
+    const errors = err.response.data.errors;
+
+    if (errors) {
+      errors.forEach(error => dispatch(setAlert(error.msg, 'danger')));
+    }
+  }
+}
 // Add post
 export const addPost = (chatId, formData, history) => async dispatch => {
   const config = {

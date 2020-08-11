@@ -39,6 +39,7 @@ import React, { Fragment, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getChatById } from '../../actions/profile';
+import { Link } from 'react-router-dom';
 
 const Post = ({
   getChatById,
@@ -69,7 +70,7 @@ const Post = ({
     post._id.toString() === match.params.postId);
 
   return <Fragment>
-    <div className="profilge bg-light">
+    <div className="profile bg-light">
       <div>
         <h2>{post.title}</h2>
       </div>
@@ -77,12 +78,16 @@ const Post = ({
         {post.text}
       </div>
     </div>
+    <Link to={`/comment-form/${chat._id}/${post._id}`}>Create Comment</Link>
+    <br />
+    <h2>Comments:</h2>
+    <br />
     {post.comments.length > 0 ? post.comments.map(comment => (
       <div className="profile bg-light" key={comment._id}>
         <div>
-          <h2>
+          <h4>
             {comment.text}
-          </h2>
+          </h4>
         </div>
       </div>
     )) : <h4>No comments</h4>}

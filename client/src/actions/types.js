@@ -20,3 +20,5 @@ export const ADD_POST = 'ADD_POST';
 export const POST_FAIL = 'POST_FAIL';
 export const GET_POST = 'GET_POST';
 export const RETRIEVE_FAIL = 'RETRIEVE_FAIL';
+export const ADD_COMMENT = 'ADD_COMMENT';
+export const COMMENT_FAIL = 'COMMENT_FAIL';
