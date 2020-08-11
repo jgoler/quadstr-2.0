@@ -19,7 +19,7 @@ app.use('/api/profile', require('./routes/api/profile'));
 app.use('/api/chats', require('./routes/api/chats'));
 
 // Serve static assets in production
-if (process.eventNames.NODE_ENV === 'production') {
+if (process.env.NODE_ENV === 'production') {
   // Set static folder
   app.use(express.static('client/build'));
 
