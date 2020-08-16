@@ -27,11 +27,21 @@ const Chat = ({
     text
   } = formData;
 
+  const [isClicked, setClicked] = useState({
+    clicked: false
+  });
+
+  const { clicked } = isClicked;
+
+  const changed = e => setClicked({ clicked: true });
+
   let allQuadMembers = "";
   let partialQuadMembers = "";
 
   const onChange = e => setFormData({ ...formData, [e.target.name]: e.target.value });
 
+  console.log(clicked);
+  console.log(`Not clicked is equal to ${!clicked} `);
 
   return chat ? <Fragment>
     {
@@ -50,8 +60,6 @@ const Chat = ({
           partialQuadMembers += ` ${user.name}`
         } else if (index < 3) {
           partialQuadMembers += ` ${user.name},`
-        } else if (index === 3) {
-          partialQuadMembers += ` and ${chat.users.length - 3} more`
         } else {
           partialQuadMembers += ""
         }
@@ -59,7 +67,9 @@ const Chat = ({
     }
     <h1 className="large text-primary">{`${chat.title} quad`}</h1>
     <p className="lead">Welcome to {chat.title}</p>
-    <p><span style={{ color: "#17a2b8" }}>Members:</span> {allQuadMembers} </p>
+    {chat.users.length > 3 && !clicked ?
+      <p><span style={{ color: "#17a2b8" }}>Members:</span> {partialQuadMembers} <span onClick={changed} style={{ color: "#17a2b8" }}>and {chat.users.length - 3} others</span></p> : <p><span style={{ color: "#17a2b8" }}>Members:</span> {allQuadMembers}</p>}
+
     <br />
     <div className="post-form">
       <div className="post-form-header bg-primary">
@@ -128,7 +138,6 @@ const Chat = ({
     </Fragment>
   )
 }
-
 */
 Chat.propTypes = {
   getChatById: PropTypes.func.isRequired,
@@ -142,113 +151,3 @@ const mapStateToProps = state => ({
 })
 
 export default connect(mapStateToProps, { getChatById, addPost })(Chat);
-
-
-/*
-import React, { Fragment } from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { useParams } from 'react-router-dom';
-
-const Chat = props => {
-  const chatId = useParams();
-  return <Fragment>
-    {chatId}
-  </Fragment>
-};
-
-Chat.propTypes = {};
-
-export default Chat;
-
-
-/*
-import React, { Fragment, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { getCurrentChat } from '../../actions/profile';
-import Posts from './Posts';
-
-const Chat = ({ chat }) => {
-  return loading && chat === null ? <div>Loading...</div> : <Fragment>
-  <h1 className="large text-primary">
-    {chat.title}
-  </h1>
-  <Link to="#!">Chat details</Link>
-  {chat !== null ? (
-    <Fragment>
-      <Posts post={chat.posts} />
-    </Fragment>) :
-    (
-      <Fragment>
-        <Link to="/create-post">Create New Post</Link>
-        <div className="profile bg-light">
-          <div>
-            <h2>
-              Posts:
-            </h2>
-            <p>There are no posts</p>
-          </div>
-        </div>
-      </Fragment>
-    )}
-};
-
-
-Chat.propTypes = {
-  getCurrentChat: PropTypes.func.isRequired,
-  auth: PropTypes.object.isRequired,
-  chat: PropTypes.object.isRequired
-};
-
-const mapStateToProps = state => ({
-  auth: state.auth,
-  chat: state.chat
-});
-
-export default connect(mapStateToProps, { getCurrentChat })(Chat);
-
-
-  */
-
-/*
-import React, { Fragment, useState } from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-
-const Chat = ({ chat }) => {
-const posts = chat.map(post => (
-  <div key={post._id} class="profile bg-light">
-    <div>
-      <h2><Link to="post.html">{post.title}</Link></h2>
-    </div>
-    <div>
-      {post.text}
-    </div>
-  </div>
-));
-return (
-  <Fragment>
-    <h1 className="large text-primary">
-      {chat.title}
-    </h1>
-    <Link to="/chat-details">Chat Details</Link>
-    <p className="lead">
-      Posts
-    </p>
-    <Link to="create_post.html">Create new post</Link>
-    <div class="posts">
-      {posts}
-    </div>
-  </Fragment>
-)
-};
-
-Chat.propTypes = {
-chat: PropTypes.object.isRequired
-};
-
-export default Chat;
-*/

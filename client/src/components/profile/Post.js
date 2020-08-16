@@ -86,7 +86,6 @@ const Post = ({
       </div>
       <div>
         {post.text}
-        {post.date.toString()}
       </div>
     </div>
     <br />
@@ -106,7 +105,7 @@ const Post = ({
         value={text}
         onChange={e => onChange(e)}
       />
-      <input type="submit" value="Submit" class="btn btn-dark my-1" />
+      <input type="submit" value="Submit" className="btn btn-dark my-1" />
     </form>
     <br />
     {post.comments.length > 0 ? post.comments.map(comment => (

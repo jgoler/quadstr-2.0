@@ -106,11 +106,7 @@ router.post('/', [auth, [
     'title',
     'Title is required')
     .not()
-    .isEmpty(),
-  check(
-    'password',
-    'Please enter a password with 6 or more characters'
-  ).isLength({ min: 6 })
+    .isEmpty()
 ]],
   async (req, res) => {
     const errors = validationResult(req);
@@ -124,9 +120,9 @@ router.post('/', [auth, [
       //const members = [req.user.id];
 
       const passcode = Str.random(7);
-      console.log(passcode);
-      console.log(req.user.name);
-      console.log(req.user.id);
+      //console.log(passcode);
+      //console.log(req.user.name);
+      //console.log(req.user.id);
 
       const newChat = new Chat({
         title: req.body.title,
@@ -137,13 +133,12 @@ router.post('/', [auth, [
             name: req.user.name
           }
         ],
-        code: passcode,
-        password: req.body.password
+        code: passcode
       });
 
-      const salt = await bcrypt.genSalt(10);
+      //const salt = await bcrypt.genSalt(10);
 
-      newChat.password = await bcrypt.hash(req.body.password, salt);
+      //newChat.password = await bcrypt.hash(req.body.password, salt);
 
       const chat = await newChat.save();
       res.json(chat);
@@ -163,11 +158,6 @@ router.put('/', [auth,
       'code',
       'Please include the code for the chat')
       .not()
-      .isEmpty(),
-    check(
-      'password',
-      'Please include the password for the chat'
-    ).not()
       .isEmpty()
   ]
 ],
@@ -192,11 +182,8 @@ router.put('/', [auth,
 
       //console.log(chat.password);
 
-      const isMatch = await bcrypt.compare(req.body.password, chat.password);
+      //const isMatch = await bcrypt.compare(req.body.password, chat.password);
 
-      if (!isMatch) {
-        return res.status(400).json({ errors: [{ msg: 'Invalid Credentials' }] });
-      }
 
       const newUser = {
         user: req.user.id,

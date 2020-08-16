@@ -78,13 +78,11 @@ import { joinChat } from '../../actions/chat';
 
 const JoinChat = ({ joinChat, history }) => {
   const [formData, setFormData] = useState({
-    code: '',
-    password: ''
+    code: ''
   });
 
   const {
-    code,
-    password
+    code
   } = formData;
 
   const onChange = e => setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -104,9 +102,6 @@ const JoinChat = ({ joinChat, history }) => {
         <form action="dashboard.html" className="form"  >
           <div className="form-group">
             <input type="text" placeholder="Chat Code" name='code' value={code} required onChange={onChange} />
-          </div>
-          <div className="form-group">
-            <input type="password" placeholder="Chat Password" name='password' value={password} required minLength="6" onChange={onChange} />
           </div>
           <input type="submit" value="Join" className="btn btn-primary" />
         </form>

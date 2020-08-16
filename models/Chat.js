@@ -6,10 +6,6 @@ const ChatSchema = new Schema({
     type: String,
     required: true
   },
-  password: {
-    type: String,
-    required: true
-  },
   creator: {
     type: Schema.Types.ObjectId,
     ref: 'user'

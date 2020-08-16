@@ -113,14 +113,14 @@ export const addPost = (chatId, formData) => async dispatch => {
   }
 }
 // Create Chat
-export const createChat = ({ title, password, password2 }, history) => async dispatch => {
+export const createChat = ({ title }, history) => async dispatch => {
   const config = {
     headers: {
       'Content-Type': 'application/json'
     }
   }
 
-  const body = JSON.stringify({ title, password, password2 });
+  const body = JSON.stringify({ title });
 
   try {
     const res = await axios.post('/api/chats', body, config);
