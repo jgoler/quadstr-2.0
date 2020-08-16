@@ -10,14 +10,11 @@ const Chats = ({ chat }) => {
   ));
   return (
     <Fragment>
-      <Link to="/create-chat">Create New Chat</Link>
+      <Link to="/create-chat">Create New Quad</Link>
       <br />
-      <Link to="/join-chat">Join a Chat</Link>
+      <Link to="/join-chat">Join a Quad</Link>
       <div className="profiles">
         <div className="profile bg-light">
-          <div>
-            <h2>Your chats:</h2>
-          </div>
           <ul>
             {chats}
           </ul>

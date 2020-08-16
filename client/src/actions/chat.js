@@ -52,7 +52,7 @@ export const getCurrentProfile = () => async dispatch => {
 */
 
 // Add comment
-export const addComment = (chatId, postId, formData, history) => async dispatch => {
+export const addComment = (chatId, postId, formData) => async dispatch => {
   const config = {
     headers: {
       'Content-Type': 'application/json'
@@ -68,7 +68,7 @@ export const addComment = (chatId, postId, formData, history) => async dispatch 
 
     dispatch(setAlert('Comment Created', 'success'));
 
-    history.push(`/post/${chatId}/${postId}`);
+    //history.push(`/post/${chatId}/${postId}`);
   } catch (err) {
     const errors = err.response.data.errors;
 
@@ -78,7 +78,7 @@ export const addComment = (chatId, postId, formData, history) => async dispatch 
   }
 }
 // Add post
-export const addPost = (chatId, formData, history) => async dispatch => {
+export const addPost = (chatId, formData) => async dispatch => {
   const config = {
     headers: {
       'Content-Type': 'application/json'
@@ -97,7 +97,7 @@ export const addPost = (chatId, formData, history) => async dispatch => {
     dispatch(setAlert('Post Created', 'success'));
 
     //history.push('/profile');
-    history.push(`/chat/${chatId}`);
+    //history.push(`/chat/${chatId}`);
   } catch (err) {
     const errors = err.response.data.errors;
 

@@ -14,7 +14,7 @@ const Profile = ({
   }, [getCurrentProfile]);
   return loading && profile === null ? <div>Loading...</div> : <Fragment>
     <h1 className="large text-primary">
-      Profile
+      Your Quads
     </h1>
     <p className="lead">Welcome {user && user.name}!</p>
     {profile !== null ? (
@@ -23,15 +23,15 @@ const Profile = ({
       </Fragment>) :
       (
         <Fragment>
-          <Link to="/create-chat">Create New Chat</Link>
+          <Link to="/create-chat">Create New Quad</Link>
           <br />
-          <Link to="/join-chat">Join a Chat</Link>
+          <Link to="/join-chat">Join a Quad</Link>
           <div className="profiles">
             <div className="profile bg-light">
               <div>
-                <h2>Your chats:</h2>
+                <h2>Your Quads:</h2>
               </div>
-              <p>You have no chats</p>
+              <p>You have no quads</p>
             </div>
           </div>
         </Fragment>
