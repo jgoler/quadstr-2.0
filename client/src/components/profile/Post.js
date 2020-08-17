@@ -40,6 +40,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getChatById } from '../../actions/profile';
 import { addComment } from '../../actions/chat';
+import { Link } from 'react-router-dom';
 
 const Post = ({
   getChatById,
@@ -79,6 +80,9 @@ const Post = ({
     post._id.toString() === match.params.postId);
 
   return <Fragment>
+    <Link to={`/chat/${match.params.chatId}`}>
+      <i class="fas fa-arrow-left"></i> Return to Quad
+    </Link>
     <h2>Discussion:</h2>
     <div className="profile bg-light">
       <div>
@@ -96,6 +100,7 @@ const Post = ({
     <form className="form my-1" onSubmit={e => {
       e.preventDefault();
       addComment(match.params.chatId, match.params.postId, { text });
+      setFormData({ ...formData, text: "" });
     }}
     >
       <textarea

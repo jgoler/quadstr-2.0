@@ -13,11 +13,15 @@ const Chat = ({
   match }) => {
   useEffect(() => {
     getChatById(match.params.id)
-  }, [getChatById, match.params.id]);
+  });
 
   const [formData, setFormData] = useState({
     title: '',
     text: ''
+  });
+
+  const [hasSubmitted, setSubmitted] = useState({
+    submitted: false
   });
 
 
@@ -27,6 +31,8 @@ const Chat = ({
     text
   } = formData;
 
+  const { submitted } = hasSubmitted;
+
   const [isClicked, setClicked] = useState({
     clicked: false
   });
@@ -35,13 +41,15 @@ const Chat = ({
 
   const changed = e => setClicked({ clicked: true });
 
+  const changeSubmitted = e => setSubmitted({ submitted: true });
+
   let allQuadMembers = "";
   let partialQuadMembers = "";
 
   const onChange = e => setFormData({ ...formData, [e.target.name]: e.target.value });
 
-  console.log(clicked);
-  console.log(`Not clicked is equal to ${!clicked} `);
+  //console.log(clicked);
+  //console.log(`Not clicked is equal to ${!clicked} `);
 
   return chat ? <Fragment>
     {
@@ -65,11 +73,14 @@ const Chat = ({
         }
       })
     }
+    <Link to={`/profile`}>
+      <i className="fas fa-arrow-left"></i> Return to Your Quads
+    </Link>
     <h1 className="large text-primary">{`${chat.title} quad`}</h1>
     <p className="lead">Welcome to {chat.title}</p>
     {chat.users.length > 3 && !clicked ?
-      <p><span style={{ color: "#17a2b8" }}>Members:</span> {partialQuadMembers} <span onClick={changed} style={{ color: "#17a2b8" }}>and {chat.users.length - 3} others</span></p> : <p><span style={{ color: "#17a2b8" }}>Members:</span> {allQuadMembers}</p>}
-
+      <p><span style={{ color: "#17a2b8" }}>Members:</span> {partialQuadMembers} <span onClick={changed} className="clickable" style={{ color: "#17a2b8" }}>and {chat.users.length - 3} others</span></p> : <p><span style={{ color: "#17a2b8" }}>Members:</span> {allQuadMembers}</p>}
+    <p><span style={{ color: "#17a2b8" }}>Chat Code:</span> {chat.code}</p>
     <br />
     <div className="post-form">
       <div className="post-form-header bg-primary">
@@ -78,6 +89,9 @@ const Chat = ({
       <form className="form my-1" onSubmit={e => {
         e.preventDefault();
         addPost(match.params.id, { title, text });
+        setSubmitted({ submitted: true });
+        setFormData({ ...formData, title: "", text: "" });
+        //setFormData({ ...formData, text: "" });
       }}
       >
         <textarea
@@ -103,25 +117,42 @@ const Chat = ({
         Discussions
       </p>
       {chat.posts.length > 0 ? chat.posts.map(post => (
-        <div className="profile bg-light" key={post._id}>
-          <div>
-            <h2><Link to={`/post/${chat._id}/${post._id}`}>{post.title}</Link></h2>
-          </div>
-          <div>
-            {post.text}
-          </div>
-          <div>
-            <span style={{ color: "#17a2b8" }}>
-              {`${post.comments.length} comment(s)`}
-            </span>
-          </div>
+        <Link to={`/post/${chat._id}/${post._id}`}>
+          <div className="profile bg-light" key={post._id}>
+            <div>
+              <h2><Link to={`/post/${chat._id}/${post._id}`}>{post.title}</Link></h2>
+            </div>
+            <div>
+              {post.text}
+            </div>
+            <div>
+              <span style={{ color: "#17a2b8" }}>
+                {`${post.comments.length} comment(s)`}
+              </span>
+            </div>
 
-        </div>
+          </div>
+        </Link>
       )) : <h4>No posts</h4>}
     </div>
 
   </Fragment > : <p>Loading...</p>
 }
+
+/*
+ {submitted ? <div className="profile bg-light">
+        <div>
+          <h2>{title}</h2>
+        </div>
+        <div>
+          {text}
+        </div>
+        <div>
+          <span style={{ color: "#17a2b8" }}>
+            {`0 comment(s)`}
+          </span>
+        </div>
+      </div> : null}*/
 
 /*
 const Chat = ({
