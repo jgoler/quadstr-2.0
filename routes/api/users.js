@@ -5,6 +5,8 @@ const User = require('../../models/User');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const config = require('config');
+const Str = require('@supercharge/strings');
+const utils = require('../../utils');
 
 // @route  Post api/users
 // @desc   Register user
@@ -35,10 +37,13 @@ router.post('/', [
         return res.status(400).json({ errors: [{ msg: 'User already exists' }] });
       }
 
+      const code = Str.random(21);
+
       user = new User({
         name,
         email,
-        password
+        password,
+        verification: code
       });
 
       const salt = await bcrypt.genSalt(10);
@@ -46,6 +51,8 @@ router.post('/', [
       user.password = await bcrypt.hash(password, salt);
 
       await user.save();
+
+      utils.sendAuthenticationEmail(email, code);
 
       const payload = {
         user: {
@@ -62,6 +69,7 @@ router.post('/', [
           if (err) throw err;
           res.json({ token });
         });
+
     } catch (err) {
       console.error(err.message);
       res.status(500).send('Server error');

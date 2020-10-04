@@ -12,6 +12,7 @@ const bcrypt = require('bcryptjs');
 // @access Public
 router.get('/', auth, async (req, res) => {
   try {
+    console.log("Test");
     const user = await User.findById(req.user.id).select('-password');
     res.json(user);
   } catch (err) {
@@ -19,6 +20,10 @@ router.get('/', auth, async (req, res) => {
     res.status(500).send('Server Error');
   }
 });
+
+// @route Get api/auth/confirm
+
+
 
 
 // @route  Post api/auth
@@ -51,6 +56,10 @@ router.post('/', [
 
       if (!isMatch) {
         return res.status(400).json({ errors: [{ msg: 'Invalid Credentials' }] });
+      }
+
+      if (!user.confirmed) {
+        return res.status(400).json({ errors: [{ msg: 'Please confirm your email to login' }] });
       }
 
       const payload = {

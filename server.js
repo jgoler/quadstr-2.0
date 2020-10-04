@@ -12,11 +12,35 @@ app.use(express.json({ extended: false }));
 
 // Define Routes
 
-app.use('/api/users', require('./routes/api/users'));
-app.use('/api/auth', require('./routes/api/auth'));
-app.use('/api/profile', require('./routes/api/profile'));
+//app.use('/api/users', require('./routes/api/users'));
+//app.use('/api/auth', require('./routes/api/auth'));
+//app.use('/api/profile', require('./routes/api/profile'));
 //app.use('/api/posts', require('./routes/api/posts'));
-app.use('/api/chats', require('./routes/api/chats'));
+//app.use('/api/chats', require('./routes/api/chats'));
+
+
+app.get('/api/confirm', async (req, res) => {
+  try {
+    console.log("Test");
+    const code = req.query.verificationString;
+    const email = req.query.email;
+    const user = await User.findAll({ email: email, verification: code });
+    if (!user) {
+      res.status(500).send('Server Error');
+    }
+    if (user.length > 1) {
+      res.status(500).send('Server Error');
+    }
+    if (user.length === 1) {
+      user[0].confirmed = true;
+      user[0].save();
+    }
+    res.status(200).send('User verified');
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server error');
+  }
+});
 
 // Serve static assets in production
 if (process.env.NODE_ENV === 'production') {

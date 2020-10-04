@@ -3,6 +3,7 @@ const config = require('config');
 
 module.exports = function (req, res, next) {
   // Get token from header
+  console.log("middleware auth test");
   const token = req.header('x-auth-token');
 
   // Check if no token
