@@ -11,7 +11,7 @@ const sendAuthenticationEmail = async (email, verificationString) => {
     }
   });
 
-  let confirmationUrl = `quadstr.com/api/auth/confirm?email=${email}&code=${verificationString}`;
+  let confirmationUrl = `quadstr.com/confirm?email=${email}&code=${verificationString}`;
 
   let info = await transporter.sendMail({
     from: '"Quadstr Confirmation" <quadstrconfirmation@gmail.com>',

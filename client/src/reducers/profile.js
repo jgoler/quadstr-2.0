@@ -5,14 +5,16 @@ import {
   GET_CHAT,
   GET_FAIL,
   GET_POST,
-  RETRIEVE_FAIL
+  RETRIEVE_FAIL,
+  CONFIRM_SUCCESS
 } from '../actions/types';
 
 const initialState = {
   profile: null,
   loading: true,
   error: {},
-  chat: null
+  chat: null,
+  confirming: false
 }
 
 export default function (state = initialState, action) {
@@ -50,6 +52,12 @@ export default function (state = initialState, action) {
         ...state,
         profile: null,
         loading: false
+      }
+    case CONFIRM_SUCCESS:
+      return {
+        ...state,
+        confirming: false,
+        profile: payload
       }
     default:
       return state;

@@ -8,7 +8,9 @@ import {
   LOGIN_SUCCESS,
   LOGIN_FAIL,
   LOGOUT,
-  CLEAR_PROFILE
+  CLEAR_PROFILE,
+  CONFIRM_SUCCESS,
+  CONFIRM_FAIL
 } from './types';
 import setAuthToken from '../utils/setAuthToken';
 
@@ -62,6 +64,29 @@ export const register = ({ name, email, password }) => async dispatch => {
 
     dispatch({
       type: REGISTER_FAIL
+    });
+  }
+}
+
+// Confirm User
+export const confirm = (email, code) => async dispatch => {
+  try {
+    const res = await axios.get(`/confirm?email=${email}&code=${code}`)
+
+    dispatch({
+      type: CONFIRM_SUCCESS
+    });
+
+  } catch (err) {
+    const errors = err.response.data.errors;
+
+    if (errors) {
+      errors.forEach(error => dispatch(setAlert(error.msg, 'danger')));
+    }
+
+
+    dispatch({
+      type: LOGIN_FAIL
     });
   }
 }

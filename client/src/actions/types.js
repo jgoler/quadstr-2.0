@@ -22,3 +22,5 @@ export const GET_POST = 'GET_POST';
 export const RETRIEVE_FAIL = 'RETRIEVE_FAIL';
 export const ADD_COMMENT = 'ADD_COMMENT';
 export const COMMENT_FAIL = 'COMMENT_FAIL';
+export const CONFIRM_SUCCESS = 'CONFIRM_SUCCESS';
+export const CONFIRM_FAIL = 'CONFIRM_FAIL';

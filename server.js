@@ -12,19 +12,19 @@ app.use(express.json({ extended: false }));
 
 // Define Routes
 
-//app.use('/api/users', require('./routes/api/users'));
-//app.use('/api/auth', require('./routes/api/auth'));
-//app.use('/api/profile', require('./routes/api/profile'));
+app.use('/api/users', require('./routes/api/users'));
+app.use('/api/auth', require('./routes/api/auth'));
+app.use('/api/profile', require('./routes/api/profile'));
 //app.use('/api/posts', require('./routes/api/posts'));
-//app.use('/api/chats', require('./routes/api/chats'));
+app.use('/api/chats', require('./routes/api/chats'));
 
 
-app.get('/api/confirm', async (req, res) => {
+app.get('/api/auth/confirm', async (req, res) => {
   try {
     console.log("Test");
-    const code = req.query.verificationString;
+    const code = req.query.code;
     const email = req.query.email;
-    const user = await User.findAll({ email: email, verification: code });
+    const user = await User.find({ email: email, verification: code });
     if (!user) {
       res.status(500).send('Server Error');
     }
@@ -34,8 +34,10 @@ app.get('/api/confirm', async (req, res) => {
     if (user.length === 1) {
       user[0].confirmed = true;
       user[0].save();
+      res.status(200).send('User verified');
     }
-    res.status(200).send('User verified');
+    // Should check if the save actually works
+    res.status(400).send('No user found');
   } catch (err) {
     console.error(err.message);
     res.status(500).send('Server error');
