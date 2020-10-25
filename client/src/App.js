@@ -50,7 +50,7 @@ const App = () => {
               <PrivateRoute exact path='/comment-form/:chatId/:postId' component={CommentForm} />
               <PrivateRoute exact path='/chat-details/:id' component={AboutChat} />
               <PrivateRoute exact path='/post/:chatId/:postId' component={Post} />
-              <PrivateRoute exact path='/confirm' component={Confirm} />
+              <Route exact path='/confirm' component={Confirm} />
             </Switch>
           </section>
         </Fragment>

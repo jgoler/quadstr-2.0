@@ -8,6 +8,9 @@ import {
   LOGOUT,
   CREATE_SUCCESS,
   CREATE_FAIL,
+  CONFIRM_SUCCESS,
+  CONFIRM_FAIL,
+  CONFIRM_STARTED
 
 } from '../actions/types';
 
@@ -16,7 +19,9 @@ const initialState = {
   isAuthenticated: null,
   loading: true,
   user: null,
-  isCompleted: null
+  isCompleted: null,
+  emailConfirmed: false,
+  emailConfirming: false
 }
 
 export default function (state = initialState, action) {
@@ -45,6 +50,24 @@ export default function (state = initialState, action) {
         ...payload,
         isCompleted: true,
         loading: false
+      };
+    case CONFIRM_SUCCESS:
+      return {
+        ...state,
+        emailConfirmed: true,
+        emailConfirming: false
+      };
+    case CONFIRM_FAIL:
+      return {
+        ...state,
+        emailConfirmed: false,
+        emailConfirming: false
+      };
+    case CONFIRM_STARTED:
+      return {
+        ...state,
+        emailConfirmed: false,
+        emailConfirming: true
       };
     case REGISTER_FAIL:
     case AUTH_ERROR:

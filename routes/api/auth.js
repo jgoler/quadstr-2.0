@@ -14,6 +14,9 @@ router.get('/', auth, async (req, res) => {
   try {
     console.log("Test");
     const user = await User.findById(req.user.id).select('-password');
+    if (!user.confirmed) {
+      return res.status(400).json({ errors: [{ msg: 'Please confirm your email to login' }] });
+    }
     res.json(user);
   } catch (err) {
     console.error(err.message);

@@ -24,3 +24,4 @@ export const ADD_COMMENT = 'ADD_COMMENT';
 export const COMMENT_FAIL = 'COMMENT_FAIL';
 export const CONFIRM_SUCCESS = 'CONFIRM_SUCCESS';
 export const CONFIRM_FAIL = 'CONFIRM_FAIL';
+export const CONFIRM_STARTED = 'CONFIRM_STARTED';

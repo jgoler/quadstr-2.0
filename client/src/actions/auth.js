@@ -10,7 +10,8 @@ import {
   LOGOUT,
   CLEAR_PROFILE,
   CONFIRM_SUCCESS,
-  CONFIRM_FAIL
+  CONFIRM_FAIL,
+  CONFIRM_STARTED
 } from './types';
 import setAuthToken from '../utils/setAuthToken';
 
@@ -36,7 +37,7 @@ export const loadUser = () => async dispatch => {
 
 
 // Register User
-export const register = ({ name, email, password }) => async dispatch => {
+export const register = ({ name, email, password }, history) => async dispatch => {
   const config = {
     headers: {
       'Content-Type': 'application/json'
@@ -53,14 +54,17 @@ export const register = ({ name, email, password }) => async dispatch => {
       payload: res.data
     });
 
-
-    dispatch(loadUser());
+    history.push('/confirm');
+    //dispatch(loadUser());
   } catch (err) {
+    dispatch(setAlert('Please confirm your email to continue'), 'danger');
+    /*
     const errors = err.response.data.errors;
 
     if (errors) {
       errors.forEach(error => dispatch(setAlert(error.msg, 'danger')));
     }
+    */
 
     dispatch({
       type: REGISTER_FAIL
@@ -70,8 +74,11 @@ export const register = ({ name, email, password }) => async dispatch => {
 
 // Confirm User
 export const confirm = (email, code) => async dispatch => {
+  dispatch({
+    type: CONFIRM_STARTED
+  });
   try {
-    const res = await axios.get(`/confirm?email=${email}&code=${code}`)
+    const res = await axios.get(`/api/auth/confirm?email=${email}&code=${code}`)
 
     dispatch({
       type: CONFIRM_SUCCESS
@@ -86,7 +93,7 @@ export const confirm = (email, code) => async dispatch => {
 
 
     dispatch({
-      type: LOGIN_FAIL
+      type: CONFIRM_FAIL
     });
   }
 }
