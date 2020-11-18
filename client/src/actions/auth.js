@@ -84,6 +84,7 @@ export const confirm = (email, code) => async dispatch => {
       type: CONFIRM_SUCCESS
     });
 
+
   } catch (err) {
     const errors = err.response.data.errors;
 
