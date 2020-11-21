@@ -33,7 +33,7 @@ const CreateChat = ({ setAlert, createChat, history }) => {
       <div className="form" onSubmit={e => onSubmit(e)}>
         <form action="dashboard.html" className="form">
           <div className="form-group">
-            <input type="text" placeholder="Chat Name" name='title' value={title} onChange={e => onChange(e)} />
+            <input type="text" placeholder="Quad Name" name='title' value={title} onChange={e => onChange(e)} />
           </div>
           <input type="submit" value="Create" className="btn btn-primary" />
         </form>
