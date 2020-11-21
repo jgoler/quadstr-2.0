@@ -105,7 +105,7 @@ const JoinChat = ({ joinChat, history }) => {
       }}>
         <form action="dashboard.html" className="form"  >
           <div className="form-group">
-            <input type="text" placeholder="Chat Code" name='code' value={code} required onChange={onChange} />
+            <input type="text" placeholder="Quad Code" name='code' value={code} required onChange={onChange} />
           </div>
           <input type="submit" value="Join" className="btn btn-primary" />
         </form>
