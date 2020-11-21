@@ -57,7 +57,7 @@ export const register = ({ name, email, password }, history) => async dispatch =
     history.push('/confirm');
     //dispatch(loadUser());
   } catch (err) {
-    dispatch(setAlert('Please confirm your email to continue'), 'danger');
+    dispatch(setAlert('Please confirm your email to continue. It might take a few minutes before you receive an email'), 'danger');
     /*
     const errors = err.response.data.errors;
 
@@ -83,6 +83,7 @@ export const confirm = (email, code) => async dispatch => {
     dispatch({
       type: CONFIRM_SUCCESS
     });
+
 
   } catch (err) {
     const errors = err.response.data.errors;

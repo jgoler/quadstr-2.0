@@ -1,4 +1,5 @@
 import React, { Fragment, useState } from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createChat } from '../../actions/chat';
@@ -24,8 +25,11 @@ const CreateChat = ({ setAlert, createChat, history }) => {
 
   return (
     <Fragment>
+      <Link to={`/profile`}>
+        <i className="fas fa-arrow-left"></i> Return to Your Quads
+      </Link>
       <h1 className="large text-primary">
-        Create New Chat
+        Create New Quad
         </h1>
       <p className="lead">
         Fill Out Form Below

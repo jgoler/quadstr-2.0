@@ -71,6 +71,7 @@ export default connect(
 
 */
 import React, { Fragment, useState } from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { joinChat } from '../../actions/chat';
@@ -89,8 +90,11 @@ const JoinChat = ({ joinChat, history }) => {
 
   return (
     <Fragment>
+      <Link to={`/profile`}>
+        <i className="fas fa-arrow-left"></i> Return to Your Quads
+    </Link>
       <h1 className="large text-primary">
-        Join a Chat
+        Join a Quad
       </h1>
       <p className="lead">
         Fill Out Form Below
