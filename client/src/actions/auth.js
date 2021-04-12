@@ -57,15 +57,14 @@ export const register = ({ name, email, password }, history) => async dispatch =
     history.push('/confirm');
     //dispatch(loadUser());
   } catch (err) {
-    dispatch(setAlert('Please confirm your email to continue. It might take a few minutes before you receive an email'), 'danger');
+    dispatch(setAlert('Please check your email to confirm your account'), 'danger');
     /*
     const errors = err.response.data.errors;
 
     if (errors) {
       errors.forEach(error => dispatch(setAlert(error.msg, 'danger')));
     }
-    */
-
+  */
     dispatch({
       type: REGISTER_FAIL
     });
