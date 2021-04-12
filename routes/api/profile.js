@@ -74,10 +74,6 @@ router.get('/me', auth, async (req, res) => {
       return res.status(400).json({ msg: 'Invalid Credentials' });
     }
 
-    if (!user.confirmed) {
-      return res.status(400).json({ msg: 'Please go to your email and confirm your account' });
-    }
-
     // '$elemMatch' allows you to search subdocuments
     const chats = await Chat.find({
       users: { $elemMatch: { user: req.user.id } }

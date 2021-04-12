@@ -21,10 +21,12 @@ const CreateChat = ({ setAlert, createChat, history }) => {
     createChat({ title }, history);
   }
 
+
+
   return (
     <Fragment>
       <Link to={`/profile`}>
-        <i className="fas fa-arrow-left"></i> Return to Your Chats
+        <i className="fas fa-arrow-left"></i> Return to Your Quads
       </Link>
       <h1 className="large text-primary">
         Create New Quad
