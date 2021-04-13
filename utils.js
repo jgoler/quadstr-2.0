@@ -7,7 +7,7 @@ const sendAuthenticationEmail = async (email, verificationString) => {
     secure: false,
     auth: {
       user: 'quadstrconfirmation@gmail.com',
-      pass: 'asklje83hhaihdjoih4dnf%T0Us',
+      pass: 'ar%&9#%W47ASRHS=}AKSDJGjdhrg@2484g{',
     }
   });
 
